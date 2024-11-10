@@ -1,12 +1,9 @@
 package br.com.lucas.usuario.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import java.time.Instant;
 
@@ -21,12 +18,10 @@ public class Usuario {
     private Instant instante;
 
     public Usuario(@NotNull @NotBlank @Email String email,
-                   @Valid @NotNull SenhaLimpa senhaLimpa) {
-        Assert.isTrue(StringUtils.hasLength(email), "E-mail não pode ser vazio");
-        Assert.notNull(senhaLimpa, "O objeto SenhaLimpa não pode ser nulo");
+                   @NotNull @NotBlank String senha) {
 
         this.email = email;
-        this.senha = senhaLimpa.hash();
+        this.senha = senha;
     }
 
     @Deprecated
